@@ -7,9 +7,12 @@ class SudokuGridReader
 
 private:
     const static string sudokuGridFilePath;
+    string readSudokuCellsOrNull();
+    int** sudokuGridFromString(string sudokuAsString); 
+    int** initializeArray();
     
 public:
-    string readSudokuCellsOrNull(); 
+    int** getSudokuGrid(); 
     
 };
 

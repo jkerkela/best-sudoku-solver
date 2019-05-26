@@ -1,8 +1,12 @@
-#include "SudokuGridReader.cpp"
+#include <string>
+#include "SudokuGridReader.h"
+#include "SudokuGridSolver.h"
 using namespace std;
 
 int main()
 {
     SudokuGridReader sudokuGridReader;
-    sudokuGridReader.readSudokuCellsOrNull();
+    SudokuGridSolver sudokuGridSolver;
+    int** sudokuGrid = sudokuGridReader.getSudokuGrid();
+    sudokuGridSolver.solve(sudokuGrid);
 }
