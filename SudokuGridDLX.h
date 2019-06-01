@@ -19,7 +19,8 @@ public:
     const static int boxSideSize;
     const static int sudokuRuleCount;
     int** initializeExactCoverGrid(); 
-    int** addActualSudokuValuesToCoverGrid(int** actualSudokuValuesGrid, int** exactCoverGrid)
+    int** addActualSudokuValuesToCoverGrid(int** actualSudokuValuesGrid, int** exactCoverGrid);
+    
 };
 
 #endif // SUDOKUGRIDDLX_H

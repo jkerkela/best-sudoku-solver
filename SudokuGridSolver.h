@@ -4,12 +4,11 @@ using namespace std;
 
 class SudokuGridSolver
 {
+    public:
+        void solve(int** sudokuGrid); 
     
-public:
-    void solve(int** sudokuGrid); 
-
-private:
-    void solveByDancingLinks(int** sudokuGrid);
+    private:
+        void solveByDancingLinks(int** sudokuGrid);
 };
 
 #endif // SUDOKUGRIDSOLVER_H
