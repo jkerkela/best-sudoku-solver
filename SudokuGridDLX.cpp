@@ -1,3 +1,4 @@
+#include <array>
 #include <iostream>
 #include <stdio.h>
 #include "SudokuGridDLX.h"
@@ -11,20 +12,23 @@ int gridColumnPosition = 0;
 int** SudokuGridDLX::initializeExactCoverGrid()
 {
     cout << "Initializing Exact Cover grid"  << endl;
-    int sudokuGrid[boardSize * boardSize * boardSize][boardSize * boardSize * sudokuRuleCount]
+    int sudokuGrid[boardSize * boardSize * boardSize][boardSize * boardSize * sudokuRuleCount];
     SudokuGridDLX::addExactCoverRuleValues(sudokuGrid);
 };
 
-int** addActualSudokuValuesToCoverGrid(int** actualSudokuValuesGrid, int** exactCoverGrid)
+int** SudokuGridDLX::addActualSudokuValuesToCoverGrid(int** actualSudokuValuesGrid, int** exactCoverGrid)
 {
-    //TODO: implemente
-    for(int i = 1; i <= S; i++){
-        for(int j = 1; j <= S; j++){
+    for(int i = 1; i <= boardSize; i++){
+        for(int j = 1; j <= boardSize; j++){
             int sudokuCellValue = actualSudokuValuesGrid[i - 1][j - 1];
             if (sudokuCellValue != 0){ 
-                for(int num = 1; num <= S; num++){
+                for(int num = 1; num <= boardSize; num++){
                     if (num != sudokuCellValue){
-                        Arrays.fill(exactCoverGrid[getIdx(i, j, num)], 0);
+                        int rowToFill = SudokuGridDLX::getGridRow(i, j, num);
+                        //Arrays.fill(exactCoverGrid[SudokuGridDLX::getGridRow(i, j, num)], 0);
+                        for (int column = 0; column < boardSize * boardSize * sudokuRuleCount; column++) {
+                            exactCoverGrid[rowToFill][column] = 0;
+                        }
                     }
                 }
             }

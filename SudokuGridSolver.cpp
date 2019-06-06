@@ -1,6 +1,7 @@
 using namespace std;
 
 #include <iostream>
+#include <List>
 #include <stdio.h>
 #include <string>
 #include <vector>
@@ -12,6 +13,9 @@ using namespace std;
 SudokuGridDLX sudokuGridDLX;
 ColumnNode header;
 int updates = 0;
+int solutions = 0;
+int updates = 0;
+list<DancingLinkNode> answer;
 
 void SudokuGridSolver::solve(int** sudokuGrid) 
 {
@@ -22,7 +26,10 @@ void SudokuGridSolver::solve(int** sudokuGrid)
 
 void SudokuGridSolver::solveByDancingLinks(int** sudokuGrid) 
 {
-   header = makeDLXBoardWithLinks(sudokuGrid);
+    header = makeDLXBoardWithLinks(sudokuGrid);
+    solutions = 0;
+    updates = 0;
+    search(0);
 }
 
 ColumnNode makeDLXBoardWithLinks(int** grid) 
@@ -61,10 +68,54 @@ ColumnNode makeDLXBoardWithLinks(int** grid)
 };
 
 //TODO: continue here
-void runSolver(){
-    solutions = 0;
-    updates = 0;
-    answer = new LinkedList<DancingNode>();
-    search(0);
-    if(verbose) showInfo();
-};
+// Heart of the algorithm
+private void search(int k){
+    if (header.R == header){ // all the columns removed
+        if(verbose){
+            System.out.println("-----------------------------------------");
+            System.out.println("Solution #" + solutions + "\n");
+        }
+        handler.handleSolution(answer);
+        if(verbose){
+            System.out.println("-----------------------------------------");
+        }
+        solutions++;
+    } else{
+        ColumnNode c = selectColumnNodeHeuristic();
+        c.cover();
+
+        for(DancingNode r = c.D; r != c; r = r.D){
+            answer.add(r);
+
+            for(DancingNode j = r.R; j != r; j = j.R){
+                j.C.cover();
+            }
+
+            search(k + 1);
+
+            r = answer.remove(answer.size() - 1);
+            c = r.C;
+
+            for(DancingNode j = r.L; j != r; j = j.L){
+                j.C.uncover();
+            }
+        }
+        c.uncover();
+    }
+}
+
+private ColumnNode selectColumnNodeNaive(){
+    return (ColumnNode) header.R;
+}
+
+private ColumnNode selectColumnNodeHeuristic(){
+    int min = Integer.MAX_VALUE;
+    ColumnNode ret = null;
+    for(ColumnNode c = (ColumnNode) header.R; c != header; c = (ColumnNode) c.R){
+        if (c.size < min){
+            min = c.size;
+            ret = c;
+        }
+    }
+    return ret;
+}
