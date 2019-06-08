@@ -7,12 +7,11 @@ using namespace std;
 class DancingLinkNode
 {
     public:
-        class ColumnNode;
         DancingLinkNode *L;
         DancingLinkNode *R;
         DancingLinkNode *U;
         DancingLinkNode *D;
-        ColumNode *C;
+        ColumnNode C;
         DancingLinkNode();
         DancingLinkNode(ColumnNode *c);
         DancingLinkNode hookRight(DancingLinkNode n1);

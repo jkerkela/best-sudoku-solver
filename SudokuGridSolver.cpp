@@ -9,13 +9,15 @@ using namespace std;
 #include "SudokuGridSolver.h"
 #include "SudokuGridDLX.h"
 #include "SudokuGridReader.h"
+#include "SolutionHandler.h"
 
 SudokuGridDLX sudokuGridDLX;
 ColumnNode header;
+SolutionHandler handler;
 int updates = 0;
 int solutions = 0;
 int updates = 0;
-list<DancingLinkNode> answer;
+vector<DancingLinkNode> answer;
 
 void SudokuGridSolver::solve(int** sudokuGrid) 
 {
@@ -68,35 +70,31 @@ ColumnNode makeDLXBoardWithLinks(int** grid)
 };
 
 //TODO: continue here
-// Heart of the algorithm
-private void search(int k){
-    if (header.R == header){ // all the columns removed
-        if(verbose){
-            System.out.println("-----------------------------------------");
-            System.out.println("Solution #" + solutions + "\n");
-        }
+// Parses through 2d binary array elements (nodes) eliminating non-valid nodes
+void search(int k){
+    if (header.R == &header){ // all the columns removed
+        cout << "Solution #" << solutions << endl;
         handler.handleSolution(answer);
-        if(verbose){
-            System.out.println("-----------------------------------------");
-        }
         solutions++;
-    } else{
+    } else {
         ColumnNode c = selectColumnNodeHeuristic();
         c.cover();
 
-        for(DancingNode r = c.D; r != c; r = r.D){
-            answer.add(r);
+        for(DancingLinkNode r = *c.D; &r != &c; r = *r.D){
+            answer.push_back(r);
 
-            for(DancingNode j = r.R; j != r; j = j.R){
+            for(DancingLinkNode j = *r.R; &j != &r; j = *j.R){
                 j.C.cover();
             }
 
             search(k + 1);
 
-            r = answer.remove(answer.size() - 1);
+            int lastElement = answer.size() - 1;
+            r = answer.at(lastElement);
+            answer.erase(answer.begin() + lastElement);
             c = r.C;
 
-            for(DancingNode j = r.L; j != r; j = j.L){
+            for(DancingLinkNode j = *r.L; &j != &r; j = *j.L){
                 j.C.uncover();
             }
         }
@@ -104,17 +102,14 @@ private void search(int k){
     }
 }
 
-private ColumnNode selectColumnNodeNaive(){
-    return (ColumnNode) header.R;
-}
-
-private ColumnNode selectColumnNodeHeuristic(){
-    int min = Integer.MAX_VALUE;
-    ColumnNode ret = null;
-    for(ColumnNode c = (ColumnNode) header.R; c != header; c = (ColumnNode) c.R){
-        if (c.size < min){
-            min = c.size;
-            ret = c;
+ColumnNode selectColumnNodeHeuristic(){
+    int min = INT_MAX;
+    ColumnNode ret = NULL;
+    ColumnNode cNode = *static_cast<ColumnNode*>(header.R);
+    for(cNode; &cNode != &header; cNode = *static_cast<ColumnNode*>(cNode.R)){
+        if (cNode.size < min){
+            min = cNode.size;
+            ret = cNode;
         }
     }
     return ret;
