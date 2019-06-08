@@ -1,14 +1,14 @@
 #ifndef SOLUTIONHANDLER_H
 #define SOLUTIONHANDLER_H
 
-#include <list>
+#include <vector>
 #include "dlxnodes/DancingLinkNode.h"
 
 class SolutionHandler {
     public:
-        void handleSolution(list<DancingLinkNode> answer);
+        void handleSolution(vector<DancingLinkNode> answer);
     private:
-        int** parseBoard(list<DancingLinkNode> answer);
+        int** parseBoard(vector<DancingLinkNode> answer);
         void printSolution(int** solution);
 };
 

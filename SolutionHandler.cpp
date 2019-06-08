@@ -5,25 +5,28 @@ using namespace std;
 
 const int boardSize = 9;
 
-void SolutionHandler::handleSolution(list<DancingLinkNode> answer) {
+void SolutionHandler::handleSolution(vector<DancingLinkNode> answer) {
     int** sudokuGrid = parseBoard(answer);
 }
 
-int** SolutionHandler::parseBoard(list<DancingLinkNode> answer) {
+int** SolutionHandler::parseBoard(vector<DancingLinkNode> answer) {
     int result[boardSize][boardSize];
     for(DancingLinkNode n : answer){
-            DancingLinkNode rcNode = n;
-            int min = stoi(rcNode.C.name);
+            DancingLinkNode node = n;
+            ColumnNode nodeC = *node.C;
+            int min = stoi(nodeC.name);
             for(DancingLinkNode tmp = *n.R; &tmp != &n; tmp = *tmp.R){
-                int val = stoi(tmp.C.name);
+                ColumnNode cNode = *tmp.C;
+                int val = stoi(cNode.name);
                 if (val < min){
                     min = val;
-                    rcNode = tmp;
+                    node = tmp;
                 }
             }
-            int ans1 = stoi(rcNode.C.name);
-            DancingLinkNode nodeR = *rcNode.R;
-            int ans2 = stoi(nodeR.C.name);
+            int ans1 = stoi(nodeC.name);
+            DancingLinkNode nodeR = *node.R;
+            ColumnNode nodeRC = *nodeR.C;
+            int ans2 = stoi(nodeRC.name);
             int r = ans1 / boardSize;
             int c = ans1 % boardSize;
             int num = (ans2 % boardSize) + 1;
