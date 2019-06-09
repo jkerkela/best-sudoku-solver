@@ -2,6 +2,7 @@
 #include "dlxnodes/DancingLinks.h"
 #include <iostream>
 #include <list>
+#include <vector>
 #include <stdio.h>
 using namespace std;
 
@@ -12,14 +13,14 @@ void SolutionHandler::handleSolution(list<DancingLinks::DancingLinkNode> answer)
     printSolution(sudokuGrid);
 }
 
-int** SolutionHandler::parseBoard(list<DancingLinks::DancingLinkNode> answer) {
-    int result[boardSize][boardSize];
+vector<vector<int>> SolutionHandler::parseBoard(list<DancingLinks::DancingLinkNode> answer) {
+    vector<vector<int>> result;
     for(DancingLinks::DancingLinkNode n : answer){
         DancingLinks::DancingLinkNode node = n;
         DancingLinks::DancingLinkNode nodeC = *node.C;
         int min = stoi(nodeC.name);
         for(DancingLinks::DancingLinkNode tmp = *n.R; &tmp != &n; tmp = *tmp.R){
-            DancingLinks::ColumnNode cNode = *tmp.C;
+            DancingLinks::DancingLinkNode cNode = *tmp.C;
             int val = stoi(cNode.name);
             if (val < min){
                 min = val;
