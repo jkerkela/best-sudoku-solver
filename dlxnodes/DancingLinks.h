@@ -3,11 +3,12 @@
 #include <string>
 using namespace std;
 
-class ColumnNode;
 class DancingLinkNode;
+class ColumnNode;
 
 class DancingLinks
 {
+    public:
     class DancingLinkNode
     {
         public:
@@ -35,7 +36,6 @@ class DancingLinks
             ColumnNode(string name);
             void cover();
             void uncover();
-        
     };
 };
 
