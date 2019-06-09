@@ -9,7 +9,7 @@ using namespace std;
 const int boardSize = 9;
 
 void SolutionHandler::handleSolution(list<DancingLinks::DancingLinkNode> answer) {
-    int** sudokuGrid = parseBoard(answer);
+    vector<vector<int>> sudokuGrid = parseBoard(answer);
     printSolution(sudokuGrid);
 }
 
@@ -39,7 +39,7 @@ vector<vector<int>> SolutionHandler::parseBoard(list<DancingLinks::DancingLinkNo
     return result;
 }
 
-void SolutionHandler::printSolution(int** result){
+void SolutionHandler::printSolution(vector<vector<int>> result){
     int n = boardSize;
     for(int i = 0; i < n; i++){
         string ret = "";
