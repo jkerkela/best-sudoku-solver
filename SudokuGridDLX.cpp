@@ -9,14 +9,14 @@ const int SudokuGridDLX::boxSideSize = 3;
 const int SudokuGridDLX::sudokuRuleCount = 4;
 int gridColumnPosition = 0;
 
-int** SudokuGridDLX::initializeExactCoverGrid()
+void SudokuGridDLX::initializeExactCoverGrid(int** sudokuGrid)
 {
     cout << "Initializing Exact Cover grid"  << endl;
-    int sudokuGrid[boardSize * boardSize * boardSize][boardSize * boardSize * sudokuRuleCount];
     SudokuGridDLX::addExactCoverRuleValues(sudokuGrid);
+
 };
 
-int** SudokuGridDLX::addActualSudokuValuesToCoverGrid(int** actualSudokuValuesGrid, int** exactCoverGrid)
+void SudokuGridDLX::addActualSudokuValuesToCoverGrid(int** actualSudokuValuesGrid, int** exactCoverGrid)
 {
     for(int i = 1; i <= boardSize; i++){
         for(int j = 1; j <= boardSize; j++){
@@ -35,6 +35,7 @@ int** SudokuGridDLX::addActualSudokuValuesToCoverGrid(int** actualSudokuValuesGr
         }
     }
 }
+
 void SudokuGridDLX::addExactCoverRuleValues(int sudokuGrid[9*9*9][9*9*4])
 {
     SudokuGridDLX::addCellRuleValues(sudokuGrid);

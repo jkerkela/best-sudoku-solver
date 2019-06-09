@@ -5,7 +5,7 @@ using namespace std;
 #include <stdio.h>
 #include <string>
 #include <vector>
-#include "dlxnodes/ColumnNode.h"
+#include "dlxnodes/DancingLinks.h"
 #include "SudokuGridSolver.h"
 #include "SudokuGridDLX.h"
 #include "SudokuGridReader.h"
@@ -21,9 +21,9 @@ vector<DancingLinkNode> answer;
 
 void SudokuGridSolver::solve(int** sudokuGrid) 
 {
-   int** intialSudokuCoverGrid = sudokuGridDLX.initializeExactCoverGrid();
-   int** sudokuCoverGridWithValues = sudokuGridDLX.addActualSudokuValuesToCoverGrid(sudokuGrid, intialSudokuCoverGrid);
-   solveByDancingLinks(sudokuCoverGridWithValues);
+   sudokuGridDLX.initializeExactCoverGrid(sudokuGrid);
+   sudokuGridDLX.addActualSudokuValuesToCoverGrid(sudokuGrid);
+   solveByDancingLinks(sudokuGrid);
 }
 
 void SudokuGridSolver::solveByDancingLinks(int** sudokuGrid) 
@@ -42,9 +42,9 @@ ColumnNode makeDLXBoardWithLinks(int** grid)
     vector<ColumnNode> columnNodes;
 
     for(int i = 0; i < columns; i++){
-        ColumnNode n = ColumnNode(to_string(i));
-        columnNodes.push_back(n);
-        DancingLinkNode dLXNode = headerNode.hookRight(n);
+        ColumnNode cNode = ColumnNode(to_string(i));
+        columnNodes.push_back(cNode);
+        DancingLinkNode dLXNode = headerNode.hookRight(cNode);
         headerNode = *static_cast<ColumnNode*>(&dLXNode);
     }
     DancingLinkNode headerNodeR = *headerNode.R;
@@ -84,7 +84,8 @@ void search(int k){
             answer.push_back(r);
 
             for(DancingLinkNode j = *r.R; &j != &r; j = *j.R){
-                j.C.cover();
+                ColumnNode cNode = *j.C;
+                cNode.cover();
             }
 
             search(k + 1);
@@ -92,10 +93,11 @@ void search(int k){
             int lastElement = answer.size() - 1;
             r = answer.at(lastElement);
             answer.erase(answer.begin() + lastElement);
-            c = r.C;
+            c = *r.C;
 
             for(DancingLinkNode j = *r.L; &j != &r; j = *j.L){
-                j.C.uncover();
+                ColumnNode cNode = *j.C;
+                cNode.uncover();
             }
         }
         c.uncover();

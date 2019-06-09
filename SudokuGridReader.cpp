@@ -5,6 +5,7 @@
 #include "SudokuGridReader.h"
 using namespace std;
 
+//TODO: fix usage
 const string sudokuGridFilePath = "./data/sudoku_grids.txt";
 
 int** SudokuGridReader::getSudokuGrid() 

@@ -2,7 +2,7 @@
 #define SOLUTIONHANDLER_H
 
 #include <vector>
-#include "dlxnodes/DancingLinkNode.h"
+#include "dlxnodes/DancingLinks.h"
 
 class SolutionHandler {
     public:

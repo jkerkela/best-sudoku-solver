@@ -32,6 +32,7 @@ int** SolutionHandler::parseBoard(vector<DancingLinkNode> answer) {
             int num = (ans2 % boardSize) + 1;
             result[r][c] = num;
         }
+    return result;
 }
 
 void printSolution(int** result){
