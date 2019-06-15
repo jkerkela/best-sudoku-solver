@@ -4,7 +4,6 @@ using namespace std;
 #include <List>
 #include <stdio.h>
 #include <string>
-#include <vector>
 #include "dlxnodes/DancingLinks.h"
 #include "SudokuGridSolver.h"
 #include "SudokuGridDLX.h"
@@ -17,7 +16,7 @@ SolutionHandler handler;
 int updates = 0;
 int solutions = 0;
 int updates = 0;
-vector<DancingLinkNode> answer;
+list<DancingLinkNode> answer;
 
 void SudokuGridSolver::solve(int** sudokuGrid) 
 {
@@ -34,7 +33,7 @@ void SudokuGridSolver::solveByDancingLinks(int** sudokuGrid)
     search(0);
 }
 
-ColumnNode makeDLXBoardWithLinks(int** grid) 
+ColumnNode SudokuGridSolver::makeDLXBoardWithLinks(int** grid) 
 {
     int columns = sudokuGridDLX.boardSize * sudokuGridDLX.boardSize * sudokuGridDLX.boardSize;
     int rows = sudokuGridDLX.boardSize * sudokuGridDLX.boardSize * sudokuGridDLX.sudokuRuleCount;
@@ -71,7 +70,7 @@ ColumnNode makeDLXBoardWithLinks(int** grid)
 
 //TODO: continue here
 // Parses through 2d binary array elements (nodes) eliminating non-valid nodes
-void search(int k){
+void SudokuGridSolver::search(int k){
     if (header.R == &header){ // all the columns removed
         cout << "Solution #" << solutions << endl;
         handler.handleSolution(answer);
@@ -104,7 +103,7 @@ void search(int k){
     }
 }
 
-ColumnNode selectColumnNodeHeuristic(){
+ColumnNode SudokuGridSolver::selectColumnNodeHeuristic(){
     int min = INT_MAX;
     ColumnNode ret = NULL;
     ColumnNode cNode = *static_cast<ColumnNode*>(header.R);

@@ -16,9 +16,13 @@ class DancingLinks
             DancingLinkNode *R;
             DancingLinkNode *U;
             DancingLinkNode *D;
-            ColumnNode *C;
+            //ORIG: ColumnNode props / types
+            DancingLinkNode *C;
+            int size; // number of ones in current column
+            string name;
+            // re-type and assign to column node, if possible
             DancingLinkNode();
-            DancingLinkNode(ColumnNode *c);
+            DancingLinkNode(DancingLinkNode *c);
             DancingLinkNode hookRight(DancingLinkNode n1);
             DancingLinkNode hookDown(DancingLinkNode n1);
             void unlinkLR();
@@ -30,8 +34,6 @@ class DancingLinks
     class ColumnNode : public DancingLinkNode
     {
         public:
-            int size; // number of ones in current column
-            string name;
             DancingLinkNode parent;
             ColumnNode(string name);
             void cover();
