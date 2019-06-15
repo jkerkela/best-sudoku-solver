@@ -1,5 +1,3 @@
-using namespace std;
-
 #include <iostream>
 #include <vector>
 #include <stdio.h>
@@ -9,6 +7,10 @@ using namespace std;
 #include "SudokuGridDLX.h"
 #include "SudokuGridReader.h"
 #include "SolutionHandler.h"
+using std::cout;
+using std::endl;
+using std::vector;
+using std::to_string;
 
 SudokuGridDLX sudokuGridDLX;
 DancingLinkNode header;

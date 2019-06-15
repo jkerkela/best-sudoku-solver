@@ -1,6 +1,6 @@
-using namespace std;
 #include <string>
 #include "DancingLinks.h"
+using std::string;
 
 ColumnNode::ColumnNode(string name){
     //ORIG:

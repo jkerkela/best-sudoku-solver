@@ -4,7 +4,10 @@
 #include <list>
 #include <vector>
 #include <stdio.h>
-using namespace std;
+using std::cout;
+using std::endl;
+using std::string;
+using std::vector;
 
 const int boardSize = 9;
 

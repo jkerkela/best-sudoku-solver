@@ -15,7 +15,7 @@ class DancingLinkNode
             //ORIG: ColumnNode props / types
             ColumnNode *C;
             int size; // number of ones in current column
-            string name;
+            std::string name;
             // re-type and assign to column node, if possible
             DancingLinkNode();
             DancingLinkNode(ColumnNode *c);
@@ -30,7 +30,7 @@ class DancingLinkNode
 class ColumnNode : public DancingLinkNode
     {
         public:
-            ColumnNode(string name);
+            ColumnNode(std::string name);
             DancingLinkNode parent;
             void cover();
             void uncover();

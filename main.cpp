@@ -1,7 +1,6 @@
 #include <string>
 #include "SudokuGridReader.h"
 #include "SudokuGridSolver.h"
-using namespace std;
 
 int main()
 {

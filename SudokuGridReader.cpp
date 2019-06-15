@@ -3,7 +3,10 @@
 #include <fstream>
 #include <stdio.h>
 #include "SudokuGridReader.h"
-using namespace std;
+using std::cout;
+using std::endl;
+using std::string;
+using std::ifstream;
 
 //TODO: fix usage
 const string sudokuGridFilePath = "./data/sudoku_grids.txt";

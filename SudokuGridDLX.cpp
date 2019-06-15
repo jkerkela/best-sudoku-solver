@@ -2,7 +2,8 @@
 #include <iostream>
 #include <stdio.h>
 #include "SudokuGridDLX.h"
-using namespace std;
+using std::cout;
+using std::endl;
 
 const int SudokuGridDLX::boardSize = 9;
 const int SudokuGridDLX::boxSideSize = 3;

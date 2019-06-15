@@ -1,4 +1,3 @@
-using namespace std;
 #include <assert.h>
 #include <stdio.h>
 #include "DancingLinks.h"
