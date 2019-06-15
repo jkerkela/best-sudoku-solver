@@ -7,7 +7,7 @@ DancingLinkNode::DancingLinkNode() {
     L = R = U = D = this;
 }
 
-DancingLinkNode::DancingLinkNode(DancingLinkNode *c) {
+DancingLinkNode::DancingLinkNode(ColumnNode *c) {
     //ORIG:
     //this(); 
     DancingLinkNode node = DancingLinkNode::DancingLinkNode();

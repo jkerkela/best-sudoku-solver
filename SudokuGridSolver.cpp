@@ -69,7 +69,7 @@ ColumnNode SudokuGridSolver::makeDLXBoardWithLinks(int** grid)
                     pPrev = &newNode;
                 DancingLinkNode dlxNode = *col.U;
                 dlxNode.hookDown(newNode);
-                DancingLinkNode prev = pPrev;
+                DancingLinkNode prev = *pPrev;
                 prev = prev.hookRight(newNode);
                 col.size++;
             }

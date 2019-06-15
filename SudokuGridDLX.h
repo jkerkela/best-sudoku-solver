@@ -1,6 +1,5 @@
 #ifndef SUDOKUGRIDDLX_H
 #define SUDOKUGRIDDLX_H
-using namespace std;
 
 class SudokuGridDLX
 {

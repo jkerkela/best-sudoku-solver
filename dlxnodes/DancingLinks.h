@@ -1,7 +1,6 @@
 #ifndef DANCINGLINKS_H
 #define DANCINGLINKS_H
 #include <string>
-using namespace std;
 
 class DancingLinkNode;
 class ColumnNode;
@@ -19,7 +18,7 @@ class DancingLinkNode
             string name;
             // re-type and assign to column node, if possible
             DancingLinkNode();
-            DancingLinkNode(DancingLinkNode *c);
+            DancingLinkNode(ColumnNode *c);
             DancingLinkNode hookRight(DancingLinkNode n1);
             DancingLinkNode hookDown(DancingLinkNode n1);
             void unlinkLR();
