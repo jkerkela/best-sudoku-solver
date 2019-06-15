@@ -37,16 +37,16 @@ ColumnNode SudokuGridSolver::makeDLXBoardWithLinks(int** grid)
 {
     int columns = sudokuGridDLX.boardSize * sudokuGridDLX.boardSize * sudokuGridDLX.boardSize;
     int rows = sudokuGridDLX.boardSize * sudokuGridDLX.boardSize * sudokuGridDLX.sudokuRuleCount;
-    ColumnNode headerNode = ColumnNode("header");
-    vector<ColumnNode> columnNodes;
+    DancingLinks::ColumnNode headerNode =  DancingLinks::ColumnNode("header");
+    vector< DancingLinks::ColumnNode> columnNodes;
 
     for(int i = 0; i < columns; i++){
-        ColumnNode cNode = ColumnNode(to_string(i));
+        DancingLinks::ColumnNode cNode =  DancingLinks::ColumnNode(to_string(i));
         columnNodes.push_back(cNode);
-        DancingLinkNode dLXNode = headerNode.hookRight(cNode);
-        headerNode = *static_cast<ColumnNode*>(&dLXNode);
+        DancingLinks::DancingLinkNode dLXNode = headerNode.hookRight(cNode);
+        headerNode = *static_cast<DancingLinks::ColumnNode*>(&dLXNode);
     }
-    DancingLinkNode headerNodeR = *headerNode.R;
+    DancingLinks::DancingLinkNode headerNodeR = *headerNode.R;
     headerNode = *headerNodeR.C;
 
     for(int i = 0; i < rows; i++){

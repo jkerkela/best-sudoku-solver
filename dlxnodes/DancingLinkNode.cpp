@@ -3,11 +3,11 @@ using namespace std;
 #include <stdio.h>
 #include "DancingLinks.h"
 
-DancingLinks::DancingLinkNode::DancingLinkNode() {
+DancingLinkNode::DancingLinkNode() {
     L = R = U = D = this;
 }
 
-DancingLinks::DancingLinkNode::DancingLinkNode(DancingLinkNode *c) {
+DancingLinkNode::DancingLinkNode(DancingLinkNode *c) {
     //ORIG:
     //this(); 
     DancingLinkNode node = DancingLinkNode::DancingLinkNode();
@@ -15,7 +15,7 @@ DancingLinks::DancingLinkNode::DancingLinkNode(DancingLinkNode *c) {
 }
 
 // hooks node n1 `below` current node
-DancingLinks::DancingLinkNode DancingLinks::DancingLinkNode::hookDown(DancingLinkNode n1){
+DancingLinkNode DancingLinkNode::hookDown(DancingLinkNode n1){
     assert (&this->C == &n1.C);
     n1.D = this->D;
     DancingLinkNode n1D = *n1.D;
@@ -28,7 +28,7 @@ DancingLinks::DancingLinkNode DancingLinks::DancingLinkNode::hookDown(DancingLin
 }
 
 // hooke a node n1 to the right of current node
-DancingLinks::DancingLinkNode DancingLinks::DancingLinkNode::hookRight(DancingLinkNode n1){
+DancingLinkNode DancingLinkNode::hookRight(DancingLinkNode n1){
     n1.R = this->R;
     DancingLinkNode n1R = *n1.R;
     *n1R.L = n1;
@@ -39,7 +39,7 @@ DancingLinks::DancingLinkNode DancingLinks::DancingLinkNode::hookRight(DancingLi
     return n1;
 }
 
-void DancingLinks::DancingLinkNode::unlinkLR(){
+void DancingLinkNode::unlinkLR(){
     DancingLinkNode iL = *this->L;
     iL.R = this->R;
     //ORIG:
@@ -51,7 +51,7 @@ void DancingLinks::DancingLinkNode::unlinkLR(){
     //updates++;
 }
 
-void DancingLinks::DancingLinkNode::relinkLR(){
+void DancingLinkNode::relinkLR(){
     DancingLinkNode iL = *this->L;
     DancingLinkNode iR = *this->R;
     iL.R = iR.L;
@@ -60,7 +60,7 @@ void DancingLinks::DancingLinkNode::relinkLR(){
     //updates++;
 }
 
-void DancingLinks::DancingLinkNode::unlinkUD(){
+void DancingLinkNode::unlinkUD(){
     DancingLinkNode iU = *this->U;
     iU.D = this->D;
     //ORIG:
@@ -72,7 +72,7 @@ void DancingLinks::DancingLinkNode::unlinkUD(){
     //updates++;
 }
 
-void DancingLinks::DancingLinkNode::relinkUD(){
+void DancingLinkNode::relinkUD(){
     DancingLinkNode iU = *this->U;
     iU.D = this;
     DancingLinkNode iD = *this->D;

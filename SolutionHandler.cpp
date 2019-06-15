@@ -8,19 +8,19 @@ using namespace std;
 
 const int boardSize = 9;
 
-void SolutionHandler::handleSolution(list<DancingLinks::DancingLinkNode> answer) {
+void SolutionHandler::handleSolution(list<DancingLinkNode> answer) {
     vector<vector<int>> sudokuGrid = parseBoard(answer);
     printSolution(sudokuGrid);
 }
 
-vector<vector<int>> SolutionHandler::parseBoard(list<DancingLinks::DancingLinkNode> answer) {
+vector<vector<int>> SolutionHandler::parseBoard(list<DancingLinkNode> answer) {
     vector<vector<int>> result;
-    for(DancingLinks::DancingLinkNode n : answer){
-        DancingLinks::DancingLinkNode node = n;
-        DancingLinks::DancingLinkNode nodeC = *node.C;
+    for(DancingLinkNode n : answer){
+        DancingLinkNode node = n;
+        DancingLinkNode nodeC = *node.C;
         int min = stoi(nodeC.name);
-        for(DancingLinks::DancingLinkNode tmp = *n.R; &tmp != &n; tmp = *tmp.R){
-            DancingLinks::DancingLinkNode cNode = *tmp.C;
+        for(DancingLinkNode tmp = *n.R; &tmp != &n; tmp = *tmp.R){
+            DancingLinkNode cNode = *tmp.C;
             int val = stoi(cNode.name);
             if (val < min){
                 min = val;
@@ -28,8 +28,8 @@ vector<vector<int>> SolutionHandler::parseBoard(list<DancingLinks::DancingLinkNo
             }
         }
         int ans1 = stoi(nodeC.name);
-        DancingLinks::DancingLinkNode nodeR = *node.R;
-        DancingLinks::DancingLinkNode nodeRC = *nodeR.C;
+        DancingLinkNode nodeR = *node.R;
+        DancingLinkNode nodeRC = *nodeR.C;
         int ans2 = stoi(nodeRC.name);
         int r = ans1 / boardSize;
         int c = ans1 % boardSize;

@@ -3,14 +3,8 @@
 #include <string>
 using namespace std;
 
-class DancingLinkNode;
-class ColumnNode;
-
-class DancingLinks
+class DancingLinkNode
 {
-    public:
-    class DancingLinkNode
-    {
         public:
             DancingLinkNode *L;
             DancingLinkNode *R;
@@ -29,9 +23,9 @@ class DancingLinks
             void relinkLR();
             void unlinkUD();
             void relinkUD();
-    };
+};
 
-    class ColumnNode : public DancingLinkNode
+class ColumnNode : public DancingLinkNode
     {
         public:
             DancingLinkNode parent;
@@ -39,6 +33,5 @@ class DancingLinks
             void cover();
             void uncover();
     };
-};
 
 #endif // DANCINGLINKS_H

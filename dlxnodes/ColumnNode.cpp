@@ -2,7 +2,7 @@ using namespace std;
 #include <string>
 #include "DancingLinks.h"
 
-DancingLinks::ColumnNode::ColumnNode(string name){
+ColumnNode::ColumnNode(string name){
     //ORIG:
     //super();
     parent = DancingLinkNode();
@@ -11,7 +11,7 @@ DancingLinks::ColumnNode::ColumnNode(string name){
     C = this;
 }
 
-void DancingLinks::ColumnNode::cover(){
+void ColumnNode::cover(){
     unlinkLR();
     for(DancingLinkNode i = *this->D; &i != &parent; i = *i.D){
         for(DancingLinkNode j = *i.R; &j != &i; j = *j.R){
@@ -23,7 +23,7 @@ void DancingLinks::ColumnNode::cover(){
     //header.size--; // not part of original
 }
 
-void DancingLinks::ColumnNode::uncover(){
+void ColumnNode::uncover(){
     for(DancingLinkNode i = *this->U; &i != &parent; i = *i.U){
         for(DancingLinkNode j = *i.L; &j != &i; j = *j.L){
             DancingLinkNode cNode = *j.C;
