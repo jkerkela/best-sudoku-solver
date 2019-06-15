@@ -25,6 +25,7 @@ void SudokuGridDLX::addActualSudokuValuesToCoverGrid(int** actualSudokuValuesGri
                 for(int num = 1; num <= boardSize; num++){
                     if (num != sudokuCellValue){
                         int rowToFill = SudokuGridDLX::getGridRow(i, j, num);
+                        //ORIG:
                         //Arrays.fill(exactCoverGrid[SudokuGridDLX::getGridRow(i, j, num)], 0);
                         for (int column = 0; column < boardSize * boardSize * sudokuRuleCount; column++) {
                             exactCoverGrid[rowToFill][column] = 0;
@@ -36,7 +37,7 @@ void SudokuGridDLX::addActualSudokuValuesToCoverGrid(int** actualSudokuValuesGri
     }
 }
 
-void SudokuGridDLX::addExactCoverRuleValues(int sudokuGrid[9*9*9][9*9*4])
+void SudokuGridDLX::addExactCoverRuleValues(int** sudokuGrid)
 {
     SudokuGridDLX::addCellRuleValues(sudokuGrid);
     SudokuGridDLX::addRowRuleValues(sudokuGrid);
@@ -44,7 +45,7 @@ void SudokuGridDLX::addExactCoverRuleValues(int sudokuGrid[9*9*9][9*9*4])
     SudokuGridDLX::addBoxRuleValues(sudokuGrid);
 };
 
-void SudokuGridDLX::addCellRuleValues(int sudokuGrid[9*9*9][9*9*4])
+void SudokuGridDLX::addCellRuleValues(int** sudokuGrid)
 {
     for(int row = 1; row <= boardSize; row++){
             for(int column = 1; column <= boardSize; column++, gridColumnPosition++){
@@ -61,7 +62,7 @@ int SudokuGridDLX::getGridRow(int row, int column, int number)
     (column - 1) * boardSize + (number - 1);
 };
 
-void SudokuGridDLX::addRowRuleValues(int sudokuGrid[9*9*9][9*9*4])
+void SudokuGridDLX::addRowRuleValues(int** sudokuGrid)
 {
     for(int row = 1; row <= boardSize; row++){
             for(int number = 1; number <= boardSize; number++, gridColumnPosition++){
@@ -72,7 +73,7 @@ void SudokuGridDLX::addRowRuleValues(int sudokuGrid[9*9*9][9*9*4])
     }
 };
 
-void SudokuGridDLX::addColumnRuleValues(int sudokuGrid[9*9*9][9*9*4])
+void SudokuGridDLX::addColumnRuleValues(int** sudokuGrid)
 {
     for(int column = 1; column <= boardSize; column++){
             for(int number = 1; number <= boardSize; number++, gridColumnPosition++){
@@ -83,7 +84,7 @@ void SudokuGridDLX::addColumnRuleValues(int sudokuGrid[9*9*9][9*9*4])
     }
 };
 
-void SudokuGridDLX::addBoxRuleValues(int sudokuGrid[9*9*9][9*9*4])
+void SudokuGridDLX::addBoxRuleValues(int** sudokuGrid)
 {
     for(int row = 1; row <= boardSize; row += boxSideSize){
         for(int column = 1; column <= boardSize; column += boxSideSize){

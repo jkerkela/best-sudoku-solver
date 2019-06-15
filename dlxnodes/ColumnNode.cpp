@@ -16,7 +16,7 @@ void ColumnNode::cover(){
     for(DancingLinkNode i = *this->D; &i != &parent; i = *i.D){
         for(DancingLinkNode j = *i.R; &j != &i; j = *j.R){
             j.unlinkUD();
-            DancingLinkNode cNode = *j.C;
+            ColumnNode cNode = *j.C;
             cNode.size--;
         }
     }
@@ -26,7 +26,7 @@ void ColumnNode::cover(){
 void ColumnNode::uncover(){
     for(DancingLinkNode i = *this->U; &i != &parent; i = *i.U){
         for(DancingLinkNode j = *i.L; &j != &i; j = *j.L){
-            DancingLinkNode cNode = *j.C;
+            ColumnNode cNode = *j.C;
             cNode.size++;
             j.relinkUD();
         }

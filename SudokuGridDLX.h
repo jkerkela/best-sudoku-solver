@@ -13,11 +13,11 @@ class SudokuGridDLX
         void addActualSudokuValuesToCoverGrid(int** actualSudokuValuesGrid, int** exactCoverGrid);
     
     private:
-        void addExactCoverRuleValues(int sudokuGrid[9*9*9][9*9*4]);
-        void addCellRuleValues(int sudokuGrid[9*9*9][9*9*4]);
-        void addRowRuleValues(int sudokuGrid[9*9*9][9*9*4]);
-        void addColumnRuleValues(int sudokuGrid[9*9*9][9*9*4]);
-        void addBoxRuleValues(int sudokuGrid[9*9*9][9*9*4]);
+        void addExactCoverRuleValues(int** sudokuGrid);
+        void addCellRuleValues(int** sudokuGrid);
+        void addRowRuleValues(int** sudokuGrid);
+        void addColumnRuleValues(int** sudokuGrid);
+        void addBoxRuleValues(int** sudokuGrid);
         int getGridRow(int row, int column, int number); 
 };
 

@@ -3,6 +3,9 @@
 #include <string>
 using namespace std;
 
+class DancingLinkNode;
+class ColumnNode;
+
 class DancingLinkNode
 {
         public:
@@ -11,7 +14,7 @@ class DancingLinkNode
             DancingLinkNode *U;
             DancingLinkNode *D;
             //ORIG: ColumnNode props / types
-            DancingLinkNode *C;
+            ColumnNode *C;
             int size; // number of ones in current column
             string name;
             // re-type and assign to column node, if possible
@@ -28,8 +31,9 @@ class DancingLinkNode
 class ColumnNode : public DancingLinkNode
     {
         public:
-            DancingLinkNode parent;
+            ColumnNode();
             ColumnNode(string name);
+            DancingLinkNode parent;
             void cover();
             void uncover();
     };

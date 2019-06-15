@@ -11,7 +11,7 @@ DancingLinkNode::DancingLinkNode(DancingLinkNode *c) {
     //ORIG:
     //this(); 
     DancingLinkNode node = DancingLinkNode::DancingLinkNode();
-    node.C = c;
+    node.C = static_cast<ColumnNode*>(c);
 }
 
 // hooks node n1 `below` current node
