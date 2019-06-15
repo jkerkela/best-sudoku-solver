@@ -48,7 +48,7 @@ ColumnNode SudokuGridSolver::makeDLXBoardWithLinks(int** grid)
     int columns = sudokuGridDLX.boardSize * sudokuGridDLX.boardSize * sudokuGridDLX.boardSize;
     int rows = sudokuGridDLX.boardSize * sudokuGridDLX.boardSize * sudokuGridDLX.sudokuRuleCount;
     ColumnNode headerNode =  ColumnNode("header");
-    vector< ColumnNode> columnNodes;
+    vector<ColumnNode> columnNodes;
 
     for(int i = 0; i < columns; i++){
         ColumnNode cNode =  ColumnNode(to_string(i));
@@ -60,15 +60,16 @@ ColumnNode SudokuGridSolver::makeDLXBoardWithLinks(int** grid)
     headerNode = *static_cast<ColumnNode*>(headerNodeR.C);
 
     for(int i = 0; i < rows; i++){
-        DancingLinkNode prev = NULL;
+        DancingLinkNode* pPrev = NULL;
         for(int j = 0; j < columns; j++){
             if (grid[i][j] == 1){
                 ColumnNode col = columnNodes.at(j);
                 DancingLinkNode newNode = DancingLinkNode(col);
-                if (!&prev)
-                    prev = newNode;
+                if (!&pPrev)
+                    pPrev = &newNode;
                 DancingLinkNode dlxNode = *col.U;
                 dlxNode.hookDown(newNode);
+                DancingLinkNode prev = pPrev;
                 prev = prev.hookRight(newNode);
                 col.size++;
             }
@@ -78,7 +79,6 @@ ColumnNode SudokuGridSolver::makeDLXBoardWithLinks(int** grid)
     return headerNode;
 };
 
-//TODO: continue here
 // Parses through 2d binary array elements (nodes) eliminating non-valid nodes
 void SudokuGridSolver::search(int k){
     if (header.R == &header){ // all the columns removed
@@ -115,13 +115,13 @@ void SudokuGridSolver::search(int k){
 
 ColumnNode SudokuGridSolver::selectColumnNodeHeuristic(){
     int min = INT_MAX;
-    ColumnNode ret;
+    ColumnNode* pRet = NULL;
     ColumnNode cNode = *static_cast<ColumnNode*>(header.R);
     for(cNode; &cNode != &header; cNode = *static_cast<ColumnNode*>(cNode.R)){
         if (cNode.size < min){
             min = cNode.size;
-            ret = cNode;
+            pRet = &cNode;
         }
     }
-    return cNode;
+    return *pRet;
 }

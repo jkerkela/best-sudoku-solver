@@ -31,7 +31,6 @@ class DancingLinkNode
 class ColumnNode : public DancingLinkNode
     {
         public:
-            ColumnNode();
             ColumnNode(string name);
             DancingLinkNode parent;
             void cover();
