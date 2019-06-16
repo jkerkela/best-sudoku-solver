@@ -2,7 +2,7 @@
 #include <vector>
 #include <stdio.h>
 #include <string>
-#include "dlxnodes/DancingLinks.h"
+#include "DancingLinks.h"
 #include "SudokuGridSolver.h"
 #include "SudokuGridDLX.h"
 #include "SudokuGridReader.h"

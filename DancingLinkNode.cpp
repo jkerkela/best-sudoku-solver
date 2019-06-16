@@ -9,7 +9,7 @@ DancingLinkNode::DancingLinkNode() {
 DancingLinkNode::DancingLinkNode(ColumnNode *c) {
     //ORIG:
     //this(); 
-    DancingLinkNode node = DancingLinkNode::DancingLinkNode();
+    DancingLinkNode node = DancingLinkNode();
     node.C = static_cast<ColumnNode*>(c);
 }
 

@@ -1,6 +1,6 @@
 #ifndef SUDOKUGRIDSOLVER_H
 #define SUDOKUGRIDSOLVER_H
-#include "dlxnodes/DancingLinks.h"
+#include "DancingLinks.h"
 
 class SudokuGridSolver
 {

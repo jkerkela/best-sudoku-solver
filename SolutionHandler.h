@@ -3,14 +3,14 @@
 
 #include <list>
 #include <vector>
-#include "dlxnodes/DancingLinks.h"
+#include "DancingLinks.h"
 
 class SolutionHandler {
     public:
-        void handleSolution(vector<DancingLinkNode> answer);
+        void handleSolution(std::vector<DancingLinkNode> answer);
     private:
-        vector<vector<int>> parseBoard(vector<DancingLinkNode> answer);
-        void printSolution(vector<vector<int>> solution);
+        std::vector<std::vector<int>> parseBoard(std::vector<DancingLinkNode> answer);
+        void printSolution(std::vector<std::vector<int>> solution);
 };
 
 #endif // SOLUTIONHANDLER_H

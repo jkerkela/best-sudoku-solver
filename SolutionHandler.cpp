@@ -1,5 +1,5 @@
 #include "SolutionHandler.h"
-#include "dlxnodes/DancingLinks.h"
+#include "DancingLinks.h"
 #include <iostream>
 #include <list>
 #include <vector>
