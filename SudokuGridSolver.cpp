@@ -67,7 +67,7 @@ ColumnNode SudokuGridSolver::makeDLXBoardWithLinks(int** grid)
             if (grid[i][j] == 1){
                 ColumnNode col = columnNodes.at(j);
                 DancingLinkNode newNode = DancingLinkNode(col);
-                if (!&pPrev)
+                if (pPrev == NULL)
                     pPrev = &newNode;
                 DancingLinkNode dlxNode = *col.U;
                 dlxNode.hookDown(newNode);
@@ -118,8 +118,7 @@ void SudokuGridSolver::search(int k){
 ColumnNode SudokuGridSolver::selectColumnNodeHeuristic(){
     int min = INT_MAX;
     ColumnNode* pRet = NULL;
-    ColumnNode cNode = *static_cast<ColumnNode*>(header.R);
-    for(cNode; &cNode != &header; cNode = *static_cast<ColumnNode*>(cNode.R)){
+    for(ColumnNode cNode = *static_cast<ColumnNode*>(header.R); &cNode != &header; cNode = *static_cast<ColumnNode*>(cNode.R)){
         if (cNode.size < min){
             min = cNode.size;
             pRet = &cNode;
