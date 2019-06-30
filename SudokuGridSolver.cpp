@@ -1,3 +1,5 @@
+#include <cstdlib> 
+#include <ctime> 
 #include <iostream>
 #include <vector>
 #include <stdio.h>
@@ -29,9 +31,8 @@ void SudokuGridSolver::solve(int** sudokuGrid)
 
 int** SudokuGridSolver::initializeArray() 
 {
-    int** exactCoverGrid = 0;
-    exactCoverGrid = new int*[9 * 9 * 9];
-    for(int i = 0; i < 9; i++){
+    int** exactCoverGrid = new int*[9 * 9 * 9];
+    for(int i = 0; i < (9 * 9 * 9); i++){
         exactCoverGrid[i] = new int[9 * 9 * 4];
     }
     return exactCoverGrid;
@@ -47,8 +48,8 @@ void SudokuGridSolver::solveByDancingLinks(int** sudokuGrid)
 
 ColumnNode SudokuGridSolver::makeDLXBoardWithLinks(int** grid) 
 {
-    int columns = sudokuGridDLX.boardSize * sudokuGridDLX.boardSize * sudokuGridDLX.boardSize;
-    int rows = sudokuGridDLX.boardSize * sudokuGridDLX.boardSize * sudokuGridDLX.sudokuRuleCount;
+    int columns = sudokuGridDLX.boardSize * sudokuGridDLX.boardSize * sudokuGridDLX.sudokuRuleCount;
+    int rows = sudokuGridDLX.boardSize * sudokuGridDLX.boardSize * sudokuGridDLX.boardSize;
     ColumnNode headerNode =  ColumnNode("header");
     vector<ColumnNode> columnNodes;
 
@@ -89,6 +90,7 @@ void SudokuGridSolver::search(int k){
         solutions++;
     } else {
         ColumnNode c = selectColumnNodeHeuristic();
+        cout << "RETURN selectColumnNodeHeuristic: " << endl;
         c.cover();
 
         for(DancingLinkNode r = *c.D; &r != &c; r = *r.D){
@@ -115,7 +117,9 @@ void SudokuGridSolver::search(int k){
     }
 }
 
+//TODO: this doesn't return! debug
 ColumnNode SudokuGridSolver::selectColumnNodeHeuristic(){
+    //ORIG
     int min = INT_MAX;
     ColumnNode* pRet = NULL;
     for(ColumnNode cNode = *static_cast<ColumnNode*>(header.R); &cNode != &header; cNode = *static_cast<ColumnNode*>(cNode.R)){

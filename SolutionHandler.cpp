@@ -23,7 +23,7 @@ vector<vector<int>> SolutionHandler::parseBoard(vector<DancingLinkNode> answer) 
         ColumnNode nodeC = *node.C;
         int min = stoi(nodeC.name);
         for(DancingLinkNode tmp = *n.R; &tmp != &n; tmp = *tmp.R){
-            DancingLinkNode cNode = *tmp.C;
+            ColumnNode cNode = *tmp.C;
             int val = stoi(cNode.name);
             if (val < min){
                 min = val;

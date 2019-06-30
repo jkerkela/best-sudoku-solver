@@ -6,19 +6,20 @@ DancingLinkNode::DancingLinkNode() {
     L = R = U = D = this;
 }
 
-DancingLinkNode::DancingLinkNode(ColumnNode *c) {
+DancingLinkNode::DancingLinkNode(ColumnNode c) {
     //ORIG:
     //this(); 
-    DancingLinkNode node = DancingLinkNode();
-    node.C = static_cast<ColumnNode*>(c);
+    L = R = U = D = this;
+    C = &c;
 }
 
 // hooks node n1 `below` current node
 DancingLinkNode DancingLinkNode::hookDown(DancingLinkNode n1){
-    assert (&this->C == &n1.C);
+    //TODO: gives assert err
+    //assert (&C == &n1.C);
     n1.D = this->D;
     DancingLinkNode n1D = *n1.D;
-    *n1D.U = n1;
+    n1D.U = &n1;
     //ORIG:
     //n1.D.U = n1;
     n1.U = this;
@@ -30,7 +31,7 @@ DancingLinkNode DancingLinkNode::hookDown(DancingLinkNode n1){
 DancingLinkNode DancingLinkNode::hookRight(DancingLinkNode n1){
     n1.R = this->R;
     DancingLinkNode n1R = *n1.R;
-    *n1R.L = n1;
+    n1R.L = &n1;
     //ORIG:
     //n1.R.L = n1;
     n1.L = this;
@@ -39,44 +40,43 @@ DancingLinkNode DancingLinkNode::hookRight(DancingLinkNode n1){
 }
 
 void DancingLinkNode::unlinkLR(){
-    DancingLinkNode iL = *this->L;
+    DancingLinkNode iL = *L;
     iL.R = this->R;
     //ORIG:
-    //this->L.R = this->R;
-    DancingLinkNode iR = *this->R;
+    //L.R = R;
+    DancingLinkNode iR = *R;
     iR.L = this->L;
     //ORIG:
-    //this->R.L = this->L;
+    //R.L = L;
     //updates++;
 }
 
 void DancingLinkNode::relinkLR(){
-    DancingLinkNode iL = *this->L;
-    DancingLinkNode iR = *this->R;
-    iL.R = iR.L;
+    DancingLinkNode iL = *L;
+    DancingLinkNode iR = *R;
+    iL.R = iR.L = this;
     //ORIG:
-    //this->L.R = this->R.L = this;
+    //L.R = R.L = this;
     //updates++;
 }
 
 void DancingLinkNode::unlinkUD(){
-    DancingLinkNode iU = *this->U;
-    iU.D = this->D;
+    DancingLinkNode iU = *U;
+    iU.D = D;
     //ORIG:
-    //this->U.D = this->D;
-    DancingLinkNode iD = *this->D;
-    iD.U = this->U;
+    //U.D = D;
+    DancingLinkNode iD = *D;
+    iD.U = U;
     //ORIG:
-    //this->D.U = this->U;
+    //D.U = U;
     //updates++;
 }
 
 void DancingLinkNode::relinkUD(){
-    DancingLinkNode iU = *this->U;
-    iU.D = this;
-    DancingLinkNode iD = *this->D;
-    iD.U = this;
+    DancingLinkNode iU = *U;
+    DancingLinkNode iD = *D;
+    iU.D = iD.U = this;
     //ORIG:
-    //this->U.D = this->D.U = this;
+    //U.D = D.U = this;
     //updates++;
 }
