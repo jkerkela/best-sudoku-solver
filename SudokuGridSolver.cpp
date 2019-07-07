@@ -61,9 +61,9 @@ ColumnNode* SudokuGridSolver::makeDLXBoardWithLinks(int** grid)
         headerNode = static_cast<ColumnNode*>(dLXNode);
     }
     DancingLinkNode* headerNodeR = headerNode->R;
-    ColumnNode* headerNodeRC = headerNodeR->C;
-    headerNode = static_cast<ColumnNode*>(headerNodeRC);
+    headerNode = static_cast<ColumnNode*>(headerNodeR->C);
 
+    //TODO: this doesn't actually update columnNode refs (columnode->D will point to columnode itself)
     for(int i = 0; i < rows; i++){
         DancingLinkNode* pPrev = NULL;
         for(int j = 0; j < columns; j++){
@@ -93,7 +93,7 @@ void SudokuGridSolver::search(int k){
         ColumnNode* c = selectColumnNodeHeuristic();
         c->cover();
 
-        //TODO: not going into this loop r == c always
+        //TODO: not going into this loop r == c always, see TODO in line 67
         for(DancingLinkNode* r = c->D; r != c; r = r->D){
             answer.push_back(r);
             for(DancingLinkNode* j = r->R; j != r; j = j->R){

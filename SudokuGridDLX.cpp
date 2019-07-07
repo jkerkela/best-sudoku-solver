@@ -26,8 +26,6 @@ void SudokuGridDLX::addActualSudokuValuesToCoverGrid(int** actualSudokuValuesGri
                 for(int num = 1; num <= boardSize; num++){
                     if (num != sudokuCellValue){
                         int rowToFill = SudokuGridDLX::getGridRow(i, j, num);
-                        //ORIG:
-                        //Arrays.fill(exactCoverGrid[SudokuGridDLX::getGridRow(i, j, num)], 0);
                         for (int column = 0; column < boardSize * boardSize * sudokuRuleCount; column++) {
                             exactCoverGrid[rowToFill][column] = 0;
                         }

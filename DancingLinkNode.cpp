@@ -3,14 +3,12 @@
 #include "DancingLinks.h"
 
 DancingLinkNode::DancingLinkNode() {
-    L = R = U = D = this;
+    this->L = this->R = this->U = this->D = this;
 }
 
 DancingLinkNode::DancingLinkNode(ColumnNode* c) {
-    //ORIG:
-    //this(); 
-    L = R = U = D = this;
-    C = c;
+    this->L = this->R = this->U = this->D = this;
+    this->C = c;
 }
 
 // hooks node n1 `below` current node
@@ -19,8 +17,6 @@ DancingLinkNode* DancingLinkNode::hookDown(DancingLinkNode* n1){
     n1->D = this->D;
     DancingLinkNode* n1D = n1->D;
     n1D->U = n1;
-    //ORIG:
-    //n1.D.U = n1;
     n1->U = this;
     this->D = n1;
     return n1;
@@ -31,8 +27,6 @@ DancingLinkNode* DancingLinkNode::hookRight(DancingLinkNode* n1){
     n1->R = R;
     DancingLinkNode* n1R = n1->R;
     n1R->L = n1;
-    //ORIG:
-    //n1.R.L = n1;
     n1->L = this;
     this->R = n1;
     return n1;
@@ -41,12 +35,8 @@ DancingLinkNode* DancingLinkNode::hookRight(DancingLinkNode* n1){
 void DancingLinkNode::unlinkLR(){
     DancingLinkNode* iL = L;
     iL->R = R;
-    //ORIG:
-    //L.R = R;
     DancingLinkNode* iR = R;
     iR->L = L;
-    //ORIG:
-    //R.L = L;
     //updates++;
 }
 
@@ -54,8 +44,6 @@ void DancingLinkNode::relinkLR(){
     DancingLinkNode* iL = L;
     DancingLinkNode* iR = R;
     iL->R = iR->L = this;
-    //ORIG:
-    //L.R = R.L = this;
     //updates++;
 }
 
@@ -71,7 +59,5 @@ void DancingLinkNode::relinkUD(){
     DancingLinkNode* iU = U;
     DancingLinkNode* iD = D;
     iU->D = iD->U = this;
-    //ORIG:
-    //U.D = D.U = this;
     //updates++;
 }

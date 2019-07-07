@@ -15,7 +15,6 @@ class DancingLinkNode
             ColumnNode *C;
             int size; // number of ones in current column
             std::string name;
-            // re-type and assign to column node, if possible
             DancingLinkNode();
             DancingLinkNode(ColumnNode* c);
             DancingLinkNode* hookRight(DancingLinkNode* n1);
@@ -29,7 +28,6 @@ class DancingLinkNode
 class ColumnNode : public DancingLinkNode
     {
         public:
-            ColumnNode(DancingLinkNode& dancingLinkNode);
             ColumnNode(std::string name);
             void cover();
             void uncover();
