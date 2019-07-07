@@ -9,8 +9,8 @@ class SudokuGridSolver
     
     private:
         void solveByDancingLinks(int** sudokuGrid);
-        ColumnNode selectColumnNodeHeuristic();
-        ColumnNode makeDLXBoardWithLinks(int** grid);
+        ColumnNode* selectColumnNodeHeuristic();
+        ColumnNode* makeDLXBoardWithLinks(int** grid);
         int** initializeArray();
         void search(int k);
 };

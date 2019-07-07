@@ -17,9 +17,9 @@ class DancingLinkNode
             std::string name;
             // re-type and assign to column node, if possible
             DancingLinkNode();
-            DancingLinkNode(ColumnNode c);
-            DancingLinkNode hookRight(DancingLinkNode n1);
-            DancingLinkNode hookDown(DancingLinkNode n1);
+            DancingLinkNode(ColumnNode* c);
+            DancingLinkNode* hookRight(DancingLinkNode* n1);
+            DancingLinkNode* hookDown(DancingLinkNode* n1);
             void unlinkLR();
             void relinkLR();
             void unlinkUD();
@@ -29,6 +29,7 @@ class DancingLinkNode
 class ColumnNode : public DancingLinkNode
     {
         public:
+            ColumnNode(DancingLinkNode& dancingLinkNode);
             ColumnNode(std::string name);
             void cover();
             void uncover();

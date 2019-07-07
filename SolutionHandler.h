@@ -7,9 +7,9 @@
 
 class SolutionHandler {
     public:
-        void handleSolution(std::vector<DancingLinkNode> answer);
+        void handleSolution(std::vector<DancingLinkNode*> answer);
     private:
-        std::vector<std::vector<int>> parseBoard(std::vector<DancingLinkNode> answer);
+        std::vector<std::vector<int>> parseBoard(std::vector<DancingLinkNode*> answer);
         void printSolution(std::vector<std::vector<int>> solution);
 };
 

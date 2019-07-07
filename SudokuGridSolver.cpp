@@ -1,6 +1,7 @@
 #include <cstdlib> 
 #include <ctime> 
 #include <iostream>
+#include <memory>
 #include <vector>
 #include <stdio.h>
 #include <string>
@@ -15,11 +16,11 @@ using std::vector;
 using std::to_string;
 
 SudokuGridDLX sudokuGridDLX;
-DancingLinkNode header;
-SolutionHandler handler;
+DancingLinkNode* header;
+SolutionHandler* handler;
 int updates = 0;
 int solutions = 0;
-vector<DancingLinkNode> answer;
+vector<DancingLinkNode*> answer;
 
 void SudokuGridSolver::solve(int** sudokuGrid) 
 {
@@ -46,59 +47,58 @@ void SudokuGridSolver::solveByDancingLinks(int** sudokuGrid)
     search(0);
 }
 
-ColumnNode SudokuGridSolver::makeDLXBoardWithLinks(int** grid) 
+ColumnNode* SudokuGridSolver::makeDLXBoardWithLinks(int** grid) 
 {
     int columns = sudokuGridDLX.boardSize * sudokuGridDLX.boardSize * sudokuGridDLX.sudokuRuleCount;
     int rows = sudokuGridDLX.boardSize * sudokuGridDLX.boardSize * sudokuGridDLX.boardSize;
-    ColumnNode headerNode =  ColumnNode("header");
-    vector<ColumnNode> columnNodes;
+    ColumnNode* headerNode = new ColumnNode("header");
+    vector<ColumnNode*> columnNodes;
 
     for(int i = 0; i < columns; i++){
-        ColumnNode cNode =  ColumnNode(to_string(i));
+        ColumnNode* cNode = new ColumnNode(to_string(i));
         columnNodes.push_back(cNode);
-        DancingLinkNode dLXNode = headerNode.hookRight(cNode);
-        headerNode = *static_cast<ColumnNode*>(&dLXNode);
+        DancingLinkNode* dLXNode = headerNode->hookRight(cNode);
+        headerNode = static_cast<ColumnNode*>(dLXNode);
     }
-    DancingLinkNode headerNodeR = *headerNode.R;
-    headerNode = *static_cast<ColumnNode*>(headerNodeR.C);
+    DancingLinkNode* headerNodeR = headerNode->R;
+    ColumnNode* headerNodeRC = headerNodeR->C;
+    headerNode = static_cast<ColumnNode*>(headerNodeRC);
 
     for(int i = 0; i < rows; i++){
         DancingLinkNode* pPrev = NULL;
         for(int j = 0; j < columns; j++){
             if (grid[i][j] == 1){
-                ColumnNode col = columnNodes.at(j);
-                DancingLinkNode newNode = DancingLinkNode(col);
+                ColumnNode* col = columnNodes.at(j);
+                DancingLinkNode* newNode = new DancingLinkNode(col);
                 if (pPrev == NULL)
-                    pPrev = &newNode;
-                DancingLinkNode dlxNode = *col.U;
-                dlxNode.hookDown(newNode);
-                DancingLinkNode prev = *pPrev;
-                prev = prev.hookRight(newNode);
-                col.size++;
+                    pPrev = newNode;
+                DancingLinkNode* dlxNode = col->U;
+                dlxNode->hookDown(newNode);
+                pPrev = pPrev->hookRight(newNode);
+                col->size++;
             }
         }
     }
-    headerNode.size = columns;
+    headerNode->size = columns;
     return headerNode;
 };
 
 // Parses through 2d binary array elements (nodes) eliminating non-valid nodes
 void SudokuGridSolver::search(int k){
-    if (header.R == &header){ // all the columns removed
+    if (header->R == header){ // all the columns removed
         cout << "Solution #" << solutions << endl;
-        handler.handleSolution(answer);
+        handler->handleSolution(answer);
         solutions++;
     } else {
-        ColumnNode c = selectColumnNodeHeuristic();
-        cout << "RETURN selectColumnNodeHeuristic: " << endl;
-        c.cover();
+        ColumnNode* c = selectColumnNodeHeuristic();
+        c->cover();
 
-        for(DancingLinkNode r = *c.D; &r != &c; r = *r.D){
+        //TODO: not going into this loop r == c always
+        for(DancingLinkNode* r = c->D; r != c; r = r->D){
             answer.push_back(r);
-
-            for(DancingLinkNode j = *r.R; &j != &r; j = *j.R){
-                ColumnNode cNode = *j.C;
-                cNode.cover();
+            for(DancingLinkNode* j = r->R; j != r; j = j->R){
+                ColumnNode* cNode = j->C;
+                cNode->cover();
             }
 
             search(k + 1);
@@ -106,27 +106,25 @@ void SudokuGridSolver::search(int k){
             int lastElement = answer.size() - 1;
             r = answer.at(lastElement);
             answer.erase(answer.begin() + lastElement);
-            c = *r.C;
+            c = r->C;
 
-            for(DancingLinkNode j = *r.L; &j != &r; j = *j.L){
-                ColumnNode cNode = *j.C;
-                cNode.uncover();
+            for(DancingLinkNode* j = r->L; j != r; j = j->L){
+                ColumnNode* cNode = j->C;
+                cNode->uncover();
             }
         }
-        c.uncover();
+        c->uncover();
     }
 }
 
-//TODO: this doesn't return! debug
-ColumnNode SudokuGridSolver::selectColumnNodeHeuristic(){
-    //ORIG
+ColumnNode* SudokuGridSolver::selectColumnNodeHeuristic(){
     int min = INT_MAX;
     ColumnNode* pRet = NULL;
-    for(ColumnNode cNode = *static_cast<ColumnNode*>(header.R); &cNode != &header; cNode = *static_cast<ColumnNode*>(cNode.R)){
-        if (cNode.size < min){
-            min = cNode.size;
-            pRet = &cNode;
+    for(ColumnNode* cNode = static_cast<ColumnNode*>(header->R); cNode != header; cNode = static_cast<ColumnNode*>(cNode->R)){
+        if (cNode->size < min){
+            min = cNode->size;
+            pRet = cNode;
         }
     }
-    return *pRet;
+    return pRet;
 }
