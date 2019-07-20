@@ -57,29 +57,27 @@ ColumnNode* SudokuGridSolver::makeDLXBoardWithLinks(int** grid)
     for(int i = 0; i < columns; i++){
         ColumnNode* cNode = new ColumnNode(to_string(i));
         columnNodes.push_back(cNode);
-        DancingLinkNode* dLXNode = headerNode->hookRight(cNode);
-        headerNode = static_cast<ColumnNode*>(dLXNode);
+        headerNode = static_cast<ColumnNode*>(headerNode->hookRight(cNode));
     }
-    DancingLinkNode* headerNodeR = headerNode->R;
-    headerNode = static_cast<ColumnNode*>(headerNodeR->C);
+    headerNode = static_cast<ColumnNode*>(headerNode->R->C);
 
-    //TODO: this doesn't actually update columnNode refs (columnode->D will point to columnode itself)
     for(int i = 0; i < rows; i++){
         DancingLinkNode* pPrev = NULL;
         for(int j = 0; j < columns; j++){
+            //TODO: the grid has value 1 in wrong places, first value 1 should be at grid[7][0], FIX
             if (grid[i][j] == 1){
                 ColumnNode* col = columnNodes.at(j);
                 DancingLinkNode* newNode = new DancingLinkNode(col);
                 if (pPrev == NULL)
                     pPrev = newNode;
-                DancingLinkNode* dlxNode = col->U;
-                dlxNode->hookDown(newNode);
+                col->U->hookDown(newNode);
                 pPrev = pPrev->hookRight(newNode);
                 col->size++;
             }
         }
     }
     headerNode->size = columns;
+    //TODO: headernode.R has always R=U=D, and they should differ, see L67
     return headerNode;
 };
 
@@ -93,7 +91,6 @@ void SudokuGridSolver::search(int k){
         ColumnNode* c = selectColumnNodeHeuristic();
         c->cover();
 
-        //TODO: not going into this loop r == c always, see TODO in line 67
         for(DancingLinkNode* r = c->D; r != c; r = r->D){
             answer.push_back(r);
             for(DancingLinkNode* j = r->R; j != r; j = j->R){

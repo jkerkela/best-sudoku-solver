@@ -42,7 +42,9 @@ int** SudokuGridReader::sudokuGridFromString(string sudokuAsString)
         int row = i / 9;
         int col = i % 9;
         if(c != '.'){
-            sudokuGrid[row][col] = c-'0';
+            sudokuGrid[row][col] = c - '0';
+        } else {
+            sudokuGrid[row][col] = 0;
         }
     }
     return sudokuGrid;
