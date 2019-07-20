@@ -64,7 +64,6 @@ ColumnNode* SudokuGridSolver::makeDLXBoardWithLinks(int** grid)
     for(int i = 0; i < rows; i++){
         DancingLinkNode* pPrev = NULL;
         for(int j = 0; j < columns; j++){
-            //TODO: the grid has value 1 in wrong places, first value 1 should be at grid[7][0], FIX
             if (grid[i][j] == 1){
                 ColumnNode* col = columnNodes.at(j);
                 DancingLinkNode* newNode = new DancingLinkNode(col);
@@ -77,7 +76,7 @@ ColumnNode* SudokuGridSolver::makeDLXBoardWithLinks(int** grid)
         }
     }
     headerNode->size = columns;
-    //TODO: headernode.R has always R=U=D, and they should differ, see L67
+    //TODO: headernode.R has always R=U=D, and they should differ
     return headerNode;
 };
 
