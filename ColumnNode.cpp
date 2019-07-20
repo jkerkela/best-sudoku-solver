@@ -3,10 +3,9 @@
 using std::string;
 
 ColumnNode::ColumnNode(string name): DancingLinkNode() {
-    this->L = this->R = this->U = this->D = this;
-    this->C = this;
-    size = 0;
-    name = name;
+    this->L = this->R = this->U = this->D = this->C = this;
+    this->size = 0;
+    this->name = name;
 }
 
 void ColumnNode::cover(){
