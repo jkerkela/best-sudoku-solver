@@ -1,4 +1,5 @@
 #include "DancingLinks.h"
+#include "../SudokuGridSolver.h"
 
 #include <assert.h>
 #include <stdio.h>
@@ -34,21 +35,17 @@ DancingLinkNode* DancingLinkNode::hookRight(DancingLinkNode* n1) {
 void DancingLinkNode::unlinkLR() {
     this->L->R = R;
     this->R->L = L;
-    //updates++;
 }
 
 void DancingLinkNode::relinkLR() {
     this->L->R = this->R->L = this;
-    //updates++;
 }
 
 void DancingLinkNode::unlinkUD() {
     this->U->D = D;
     this->D->U = U;
-    //updates++;
 }
 
 void DancingLinkNode::relinkUD() {
     this->U->D = this->D->U = this;
-    //updates++;
 }

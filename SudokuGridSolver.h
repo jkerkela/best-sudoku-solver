@@ -3,7 +3,9 @@
 #include "dlxnodes/DancingLinks.h"
 
 class SudokuGridSolver {
+    
     public:
+        void appendUpdateCount();
         void solve(int** sudokuGrid); 
     
     private:

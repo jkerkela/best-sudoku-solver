@@ -18,11 +18,11 @@ using std::endl;
 using std::vector;
 using std::to_string;
 
+int iterations = 0;
+int solutions = 0;
 SudokuGridDLX sudokuGridDLX;
 DancingLinkNode* header;
 SolutionHandler* handler;
-int updates = 0;
-int solutions = 0;
 vector<DancingLinkNode*> answer;
 
 void SudokuGridSolver::solve(int** sudokuGrid) {
@@ -44,7 +44,7 @@ int** SudokuGridSolver::initializeArray()
 void SudokuGridSolver::solveByDancingLinks(int** sudokuGrid) {
     header = makeDLXBoardWithLinks(sudokuGrid);
     solutions = 0;
-    updates = 0;
+    iterations = 0;
     search(0);
 }
 
@@ -81,9 +81,11 @@ ColumnNode* SudokuGridSolver::makeDLXBoardWithLinks(int** grid) {
 
 // Parses through 2d binary array elements (nodes) eliminating non-valid nodes
 void SudokuGridSolver::search(int k) {
+    iterations ++;
     if (header->R == header) { // all the columns removed
         cout << "Solution #" << solutions << endl;
         handler->handleSolution(answer);
+        cout << "Iteration count: " << iterations << endl;
         solutions++;
     } else {
         ColumnNode* c = selectColumnNodeHeuristic();
