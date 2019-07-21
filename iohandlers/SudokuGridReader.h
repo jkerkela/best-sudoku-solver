@@ -2,16 +2,15 @@
 #define SUDOKUGRIDREADER_H
 #include <string>
 
-class SudokuGridReader 
-{
+class SudokuGridReader {
 
-private:
-    std::string readSudokuCellsOrNull();
-    int** sudokuGridFromString(std::string sudokuAsString); 
-    int** initializeArray();
-    
-public:
-    int** getSudokuGrid(); 
+    private:
+        std::string readSudokuCellsOrNull();
+        int** sudokuGridFromString(std::string sudokuAsString); 
+        int** initializeArray();
+        
+    public:
+        int** getSudokuGrid(); 
     
 };
 

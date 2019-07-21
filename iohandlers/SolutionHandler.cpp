@@ -23,7 +23,7 @@ int** SolutionHandler::parseBoard(vector<DancingLinkNode*> answer) {
     for(DancingLinkNode* n : answer){
         DancingLinkNode* node = n;
         int min = stoi(node->C->name);
-        for(DancingLinkNode* tmp = n->R; tmp != n; tmp = tmp->R){
+        for (DancingLinkNode* tmp = n->R; tmp != n; tmp = tmp->R) {
             int val = stoi(tmp->C->name);
             if (val < min){
                 min = val;
@@ -41,9 +41,9 @@ int** SolutionHandler::parseBoard(vector<DancingLinkNode*> answer) {
 }
 
 void SolutionHandler::printSolution(int** solutionGrid) {
-    for(int i = 0; i < sudokuBoardSize; i++){
+    for (int i = 0; i < sudokuBoardSize; i++) {
         string ret = "";
-        for(int j = 0; j < sudokuBoardSize; j++){
+        for (int j = 0; j < sudokuBoardSize; j++) {
             ret += std::to_string(solutionGrid[i][j]) + " ";
         }
         cout << ret << endl;
@@ -52,7 +52,7 @@ void SolutionHandler::printSolution(int** solutionGrid) {
 
 int** SolutionHandler::initializeSolutionArray() {
     int** solutionGrid = new int*[9];
-    for(int i = 0; i < 9; i++){
+    for (int i = 0; i < 9; i++) {
         solutionGrid[i] = new int[9];
     }
     return solutionGrid;

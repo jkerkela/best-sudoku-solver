@@ -2,8 +2,7 @@
 #include "iohandlers/SudokuGridReader.h"
 #include "SudokuGridSolver.h"
 
-int main()
-{
+int main() {
     SudokuGridReader sudokuGridReader;
     SudokuGridSolver sudokuGridSolver;
     int** sudokuGrid = sudokuGridReader.getSudokuGrid();

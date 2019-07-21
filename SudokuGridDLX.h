@@ -1,8 +1,7 @@
 #ifndef SUDOKUGRIDDLX_H
 #define SUDOKUGRIDDLX_H
 
-class SudokuGridDLX
-{
+class SudokuGridDLX {
 
     public:
         void initializeExactCoverGrid(int** sudokuGrid); 

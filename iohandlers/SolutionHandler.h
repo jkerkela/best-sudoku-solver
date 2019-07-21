@@ -7,6 +7,7 @@
 #include <vector>
 
 class SolutionHandler {
+    
     public:
         void handleSolution(std::vector<DancingLinkNode*> answer);
     private:

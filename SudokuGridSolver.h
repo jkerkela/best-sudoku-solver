@@ -2,8 +2,7 @@
 #define SUDOKUGRIDSOLVER_H
 #include "dlxnodes/DancingLinks.h"
 
-class SudokuGridSolver
-{
+class SudokuGridSolver {
     public:
         void solve(int** sudokuGrid); 
     
