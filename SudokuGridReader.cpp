@@ -1,15 +1,15 @@
+#include "SudokuGridReader.h"
+#include "Constants.h"
+
 #include <iostream>
 #include <string>
 #include <fstream>
 #include <stdio.h>
-#include "SudokuGridReader.h"
+
 using std::cout;
 using std::endl;
 using std::string;
 using std::ifstream;
-
-//TODO: fix usage
-const string sudokuGridFilePath = "./data/sudoku_grids.txt";
 
 int** SudokuGridReader::getSudokuGrid() 
 {
@@ -21,7 +21,7 @@ string SudokuGridReader::readSudokuCellsOrNull()
 {
     string sudokuGrid;
     ifstream sudokuGridFile;
-    sudokuGridFile.open("./data/sudoku_grids.txt");
+    sudokuGridFile.open(sudokuGridFilePath);
     
     if (getline(sudokuGridFile, sudokuGrid))
     {
@@ -29,7 +29,7 @@ string SudokuGridReader::readSudokuCellsOrNull()
         return sudokuGrid;
     }
     else {
-        cout << "Can't read file from path: ./data/sudoku_grids.txt" << endl;
+        cout << "Can't read file from path: " +  sudokuGridFilePath << endl;
     }
     return NULL;
 }

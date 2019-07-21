@@ -1,15 +1,16 @@
 #include "SolutionHandler.h"
 #include "DancingLinks.h"
+#include "Constants.h"
+
 #include <iostream>
 #include <list>
 #include <vector>
 #include <stdio.h>
+
 using std::cout;
 using std::endl;
 using std::string;
 using std::vector;
-
-const int boardSize = 9;
 
 void SolutionHandler::handleSolution(vector<DancingLinkNode*> answer) {
     int** sudokuGrid = parseBoard(answer);
@@ -31,19 +32,18 @@ int** SolutionHandler::parseBoard(vector<DancingLinkNode*> answer) {
         }
         int ans1 = stoi(node->C->name);
         int ans2 = stoi(node->R->C->name);
-        int r = ans1 / boardSize;
-        int c = ans1 % boardSize;
-        int num = (ans2 % boardSize) + 1;
+        int r = ans1 / sudokuBoardSize;
+        int c = ans1 % sudokuBoardSize;
+        int num = (ans2 % sudokuBoardSize) + 1;
         result[r][c] = num;
     }
     return result;
 }
 
 void SolutionHandler::printSolution(int** solutionGrid) {
-    int n = boardSize;
-    for(int i = 0; i < n; i++){
+    for(int i = 0; i < sudokuBoardSize; i++){
         string ret = "";
-        for(int j = 0; j < n; j++){
+        for(int j = 0; j < sudokuBoardSize; j++){
             ret += std::to_string(solutionGrid[i][j]) + " ";
         }
         cout << ret << endl;

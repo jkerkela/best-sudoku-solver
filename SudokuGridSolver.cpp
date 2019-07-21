@@ -1,3 +1,10 @@
+#include "DancingLinks.h"
+#include "SudokuGridSolver.h"
+#include "SudokuGridDLX.h"
+#include "SudokuGridReader.h"
+#include "SolutionHandler.h"
+#include "Constants.h"
+
 #include <cstdlib> 
 #include <ctime> 
 #include <iostream>
@@ -5,11 +12,7 @@
 #include <vector>
 #include <stdio.h>
 #include <string>
-#include "DancingLinks.h"
-#include "SudokuGridSolver.h"
-#include "SudokuGridDLX.h"
-#include "SudokuGridReader.h"
-#include "SolutionHandler.h"
+
 using std::cout;
 using std::endl;
 using std::vector;
@@ -49,8 +52,8 @@ void SudokuGridSolver::solveByDancingLinks(int** sudokuGrid)
 
 ColumnNode* SudokuGridSolver::makeDLXBoardWithLinks(int** grid) 
 {
-    int columns = sudokuGridDLX.boardSize * sudokuGridDLX.boardSize * sudokuGridDLX.sudokuRuleCount;
-    int rows = sudokuGridDLX.boardSize * sudokuGridDLX.boardSize * sudokuGridDLX.boardSize;
+    int columns = sudokuBoardSize * sudokuBoardSize * sudokuRuleCount;
+    int rows = sudokuBoardSize * sudokuBoardSize * sudokuBoardSize;
     ColumnNode* headerNode = new ColumnNode("header");
     vector<ColumnNode*> columnNodes;
 
@@ -76,7 +79,6 @@ ColumnNode* SudokuGridSolver::makeDLXBoardWithLinks(int** grid)
         }
     }
     headerNode->size = columns;
-    //TODO: headernode.R has always R=U=D, and they should differ
     return headerNode;
 };
 

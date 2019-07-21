@@ -5,9 +5,6 @@ class SudokuGridDLX
 {
 
     public:
-        const static int boardSize;
-        const static int boxSideSize;
-        const static int sudokuRuleCount;
         void initializeExactCoverGrid(int** sudokuGrid); 
         void addActualSudokuValuesToCoverGrid(int** actualSudokuValuesGrid, int** exactCoverGrid);
     
