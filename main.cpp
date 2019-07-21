@@ -1,5 +1,5 @@
 #include <string>
-#include "SudokuGridReader.h"
+#include "iohandlers/SudokuGridReader.h"
 #include "SudokuGridSolver.h"
 
 int main()

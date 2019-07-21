@@ -1,5 +1,5 @@
 #include "SudokuGridReader.h"
-#include "Constants.h"
+#include "../Constants.h"
 
 #include <iostream>
 #include <string>

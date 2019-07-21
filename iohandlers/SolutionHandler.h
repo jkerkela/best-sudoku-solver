@@ -1,9 +1,10 @@
 #ifndef SOLUTIONHANDLER_H
 #define SOLUTIONHANDLER_H
 
+#include "../dlxnodes/DancingLinks.h"
+
 #include <list>
 #include <vector>
-#include "DancingLinks.h"
 
 class SolutionHandler {
     public:

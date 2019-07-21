@@ -1,8 +1,8 @@
-#include "DancingLinks.h"
+#include "dlxnodes/DancingLinks.h"
 #include "SudokuGridSolver.h"
 #include "SudokuGridDLX.h"
-#include "SudokuGridReader.h"
-#include "SolutionHandler.h"
+#include "iohandlers/SudokuGridReader.h"
+#include "iohandlers/SolutionHandler.h"
 #include "Constants.h"
 
 #include <cstdlib> 

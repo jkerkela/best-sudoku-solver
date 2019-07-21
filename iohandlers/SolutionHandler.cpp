@@ -1,6 +1,6 @@
 #include "SolutionHandler.h"
-#include "DancingLinks.h"
-#include "Constants.h"
+#include "../dlxnodes/DancingLinks.h"
+#include "../Constants.h"
 
 #include <iostream>
 #include <list>
